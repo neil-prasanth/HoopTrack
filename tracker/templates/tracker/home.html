@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HoopTrack</title>
+</head>
+<body>
+    <h1>HoopTrack</h1>
+    <p>Basketball Player Statistics Tracker</p>
+
+    <h2>Add Player Statistics</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+
+    <h2>Player Statistics</h2>
+
+    <form method="GET">
+        <input type="text" name="search" placeholder="Search player or team" value="{{ search }}">
+        <button type="submit">Search</button>
+        <a href="/">Clear</a>
+    </form>
+
+    <br>
+
+<table border="1">
+
+    <table border="1">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Opponent</th>
+            <th>Date</th>
+            <th>Points</th>
+            <th>Rebounds</th>
+            <th>Assists</th>
+        </tr>
+
+        {% for player in players %}
+        <tr>
+            <td>{{ player.player_name }}</td>
+            <td>{{ player.team }}</td>
+            <td>{{ player.opponent }}</td>
+            <td>{{ player.game_date }}</td>
+            <td>{{ player.points }}</td>
+            <td>{{ player.rebounds }}</td>
+            <td>{{ player.assists }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No statistics added yet.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
